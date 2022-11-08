@@ -20,9 +20,34 @@ def get_words(f: str, letters: List[str]) -> List[str]:
     """
     Reads the file f. Checks the words with rules and returns a list of words.
     """
-    pass
+    with open(f, 'r') as file:
+        result_word_list = []
+        for one_letter in letters:
+            for line in file:
+                if ord(get_first_letter(line)) < ord(one_letter):
+                    continue
+                line = line[:-1]
+                lst_of_letters = list(letters)
+                if_in_letters = False
+                if get_first_letter(line) == one_letter:
+                    for i in line:
+                        if i in lst_of_letters:
+                            lst_of_letters.remove(i)
+                            if_in_letters = True
+                        else:
+                            if_in_letters = False
+                            break
+                    if if_in_letters:
+                        result_word_list.append(line)
+                if get_first_letter(line) == chr(ord(one_letter) + 1):
+                    break
+        return result_word_list
+
+print(get_words('en.txt', 'abcdefgh'))
 
 
+def get_first_letter(word: str) -> str:
+    return word[:1]
 
 def get_user_words() -> List[str]:
     """
