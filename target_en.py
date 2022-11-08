@@ -27,9 +27,15 @@ def get_words(f: str, letters: List[str]) -> List[str]:
                 if ord(line[:1]) < ord(one_letter):
                     continue
                 line = line[:-1]
+                if len(line) < 4:
+                    continue
+                if line in result_word_list:
+                    continue
                 lst_of_letters = list(letters)
                 if_in_letters = False
                 if line[:1] == one_letter:
+                    if not letters[4] in line:
+                        continue
                     for i in line:
                         if i in lst_of_letters:
                             lst_of_letters.remove(i)
@@ -44,7 +50,7 @@ def get_words(f: str, letters: List[str]) -> List[str]:
                     break
         return result_word_list
 
-# print(get_words('C:/Users/1/Nazar_work/target_en/en.txt', ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']))
+# print(get_words('C:/Users/1/Nazar_work/target_en/en.txt', ['s', 'g', 'v', 'i', 'r', 'v', 'o', 'n', 'q']))
 
 def get_user_words() -> List[str]:
     """
