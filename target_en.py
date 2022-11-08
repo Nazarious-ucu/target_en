@@ -24,12 +24,12 @@ def get_words(f: str, letters: List[str]) -> List[str]:
         result_word_list = []
         for one_letter in letters:
             for line in file:
-                if ord(get_first_letter(line)) < ord(one_letter):
+                if ord(line[:1]) < ord(one_letter):
                     continue
                 line = line[:-1]
                 lst_of_letters = list(letters)
                 if_in_letters = False
-                if get_first_letter(line) == one_letter:
+                if line[:1] == one_letter:
                     for i in line:
                         if i in lst_of_letters:
                             lst_of_letters.remove(i)
@@ -39,15 +39,12 @@ def get_words(f: str, letters: List[str]) -> List[str]:
                             break
                     if if_in_letters:
                         result_word_list.append(line)
-                if get_first_letter(line) == chr(ord(one_letter) + 1):
+                if line[:1] == chr(ord(one_letter) + 1):
+                    file.seek(0)
                     break
         return result_word_list
 
-print(get_words('en.txt', 'abcdefgh'))
-
-
-def get_first_letter(word: str) -> str:
-    return word[:1]
+# print(get_words('C:/Users/1/Nazar_work/target_en/en.txt', ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']))
 
 def get_user_words() -> List[str]:
     """
