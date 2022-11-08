@@ -37,4 +37,34 @@ def get_pure_user_words(user_words: List[str], letters: List[str], words_from_di
 
 
 def results():
-    pass
+    file_str = ''
+    letters = generate_grid()
+    # letters = [['A', 'B', 'C'], ['D', 'E', 'F'], ['G', 'H', 'K']]
+    letters_lst = [j.lower() for i in letters for j in i]
+    letters_str = ''.join(letters_lst)
+    print('Your list of letter:' + letters_str)
+    file_str += 'Your list of letter:' + letters_str + '\n'
+
+    user_words = get_user_words()
+    dict_words = get_words('en.txt', letters_lst)
+    print('So your win words:')
+    file_str += 'So your win words:\n' 
+    for i in user_words:
+        if i in dict_words:
+            print(i, end= ' ')
+            file_str += i + ' '
+    file_str += '\n'
+
+    rools_words = get_pure_user_words(user_words, letters_lst, dict_words)
+    print('And your words with the rules and returns list of those words that are not in dictionary.')
+    file_str += 'And your words with the rules and returns list of those words that are not in dictionary.\n'
+    for i in rools_words:
+        print(i, end= ' ')
+        file_str += i + ' '
+
+    with open('results.txt', 'w') as file:
+        file.write(file_str)
+
+    
+
+
