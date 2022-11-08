@@ -53,8 +53,16 @@ def get_user_words() -> List[str]:
     for Windows.
     Note: the user presses the enter key after entering each word.
     """
-    pass
+    result_user_list = []
+    print("Inpur words")
+    while True:
+        try:
+            result_user_list.append(input())
+        except EOFError:
+            break
+    return result_user_list
 
+# print(get_user_words())
 
 def get_pure_user_words(user_words: List[str], letters: List[str], words_from_dict: List[str]) -> List[str]:
     """
